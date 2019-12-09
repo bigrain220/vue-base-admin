@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
+Vue.prototype.$center = new Vue() //非父子组件传值
 
 /* eslint-disable no-new */
 new Vue({

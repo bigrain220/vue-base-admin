@@ -17,15 +17,19 @@ export default new Router({
         {
           path: 'index',
           name: 'index',
-          component: resolve => require(['@/view/one/index'], resolve)
+          component: () => import('../view/one/index.vue'),
         },
         {
-          path: 'page',
-          name: 'page',
-          component: resolve => require(['@/view/one/page'], resolve)
+          path: 'pageone',
+          name: 'pageOne',
+          component: () => import('../view/two/pageone.vue'),
         },
       
       ]
-    }
+    },
+    {
+      path: '*',
+      redirect: 'user/index'
+  }
   ]
 })

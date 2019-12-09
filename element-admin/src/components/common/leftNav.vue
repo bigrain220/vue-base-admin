@@ -1,80 +1,115 @@
 <template>
-    <aside id="left-nav">
-      <el-menu :default-openeds="['1', '2']" router :collapse="isCollapse" class="el-menu-vertical-demo">
-        <el-button class="collapse-btn" @click="collapseClick"> <i class="el-icon-message"></i></el-button>
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-message"></i>
-            <span slot="title">导航一</span>
-          </template>
-          <el-menu-item index="/user/index">选项1</el-menu-item>
-          <el-menu-item index="/user/page">选项2</el-menu-item>
-        </el-submenu>
-        <el-submenu index="2">
-          <template slot="title">
-            <i class="el-icon-message"></i>
-            <span slot="title">导航二</span>
-          </template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-        </el-submenu>
-        <el-submenu index="3">
-          <template slot="title">
-            <i class="el-icon-message"></i>
-            <span slot="title">导航三</span>
-          </template>
-          <el-menu-item index="3-1">选项1</el-menu-item>
-          <el-menu-item index="3-2">选项2</el-menu-item>
-        </el-submenu>
-        <el-submenu index="4">
-          <template slot="title">
-            <i class="el-icon-message"></i>
-            <span slot="title">导航四</span>
-          </template>
-          <el-menu-item index="4-1">选项1</el-menu-item>
-          <el-menu-item index="4-2">选项2</el-menu-item>
-          <el-submenu index="4-3">
-            <template slot="title">子导航</template>
-            <el-menu-item index="4-3-1">选项1</el-menu-item>
-            <el-menu-item index="4-3-2">选项2</el-menu-item>
+  <div class="sidebar">
+    <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#324157" text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened router>
+      <template v-for="item in items">
+        <template v-if="item.subs">
+          <el-submenu :index="item.index" :key="item.index">
+            <template slot="title">
+              <i :class="item.icon"></i>
+              <span slot="title">{{ item.title }}</span>
+            </template>
+            <template v-for="subItem in item.subs">
+              <el-submenu v-if="subItem.subs" :index="subItem.index" :key="subItem.index">
+                <template slot="title">{{ subItem.title }}</template>
+                <el-menu-item v-for="(threeItem,i) in subItem.subs" :key="i" :index="threeItem.index">{{ threeItem.title }}</el-menu-item>
+              </el-submenu>
+              <el-menu-item v-else :index="subItem.index" :key="subItem.index">{{ subItem.title }}</el-menu-item>
+            </template>
           </el-submenu>
-        </el-submenu>
-      </el-menu>
-
-
-    </aside>
+        </template>
+        <template v-else>
+          <el-menu-item :index="item.index" :key="item.index">
+            <i :class="item.icon"></i>
+            <span slot="title">{{ item.title }}</span>
+          </el-menu-item>
+        </template>
+      </template>
+    </el-menu>
+  </div>
 </template>
+
 <script>
 export default {
-  name: "leftNav",
   data() {
     return {
-      isCollapse:false
+      collapse: false,
+      items: [
+        {
+          icon: "el-icon-eleme",
+          index: "index",
+          title: "系统首页"
+        },
+        {
+          icon: "el-icon-star-on",
+          index: "pageone",
+          title: "基础表格"
+        },
+        {
+          icon: "el-icon-s-order",
+          index: "tabs",
+          title: "tab选项卡"
+        },
+        {
+          icon: "el-icon-s-grid",
+          index: "3",
+          title: "表单相关",
+          subs: [
+            {
+              index: "form",
+              title: "基本表单"
+            },
+            {
+              index: "3-2",
+              title: "三级菜单",
+              subs: [
+                {
+                  index: "editor",
+                  title: "富文本编辑器"
+                },
+                {
+                  index: "markdown",
+                  title: "markdown编辑器"
+                }
+              ]
+            },
+            {
+              index: "upload",
+              title: "文件上传"
+            }
+          ]
+        }
+      ]
     };
   },
-  methods: {
-    collapseClick(){
-      this.isCollapse = !this.isCollapse;
+  computed: {
+    onRoutes() {
+      return this.$route.path.replace("/", "");
     }
+  },
+  created() {
+     this.$center.$on("isCollapse", val => {
+       this.collapse = val;
+    });
   }
 };
 </script>
+
 <style scoped>
-#left-nav{
+.sidebar {
+  display: block;
   position: absolute;
-  top: 60px;
   left: 0;
+  top: 70px;
   bottom: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: rgb(238, 241, 246)
+  overflow-y: scroll;
 }
-.collapse-btn{
-  width: 100%;
-  border:0;
+.sidebar::-webkit-scrollbar {
+  width: 0;
 }
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-  }
+.sidebar-el-menu:not(.el-menu--collapse) {
+  width: 250px;
+}
+.sidebar > ul {
+  height: 100%;
+}
 </style>

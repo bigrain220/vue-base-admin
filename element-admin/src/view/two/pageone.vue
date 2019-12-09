@@ -1,12 +1,12 @@
 <template>
-  <div class="page">
-  <el-button type="primary" size="medium">page</el-button>
+  <div>
+  <el-button type="primary" size="medium">page1</el-button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Page",
+  name: "pageOne",
   data() {
     return {};
   }
@@ -15,4 +15,5 @@ export default {
 
 
 <style scoped>
+
 </style>
