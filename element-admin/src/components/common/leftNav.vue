@@ -36,12 +36,12 @@ export default {
       items: [
         {
           icon: "el-icon-eleme",
-          index: "index",
+          index: "/user/index",
           title: "系统首页"
         },
         {
           icon: "el-icon-star-on",
-          index: "pageone",
+          index: "/user/pageone",
           title: "基础表格"
         },
         {
@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     onRoutes() {
-      return this.$route.path.replace("/", "");
+      return this.$route.path;
     }
   },
   created() {
