@@ -41,7 +41,7 @@ export default {
         },
         {
           icon: "el-icon-star-on",
-          index: "/user/pageone",
+          index: "/user/pageTwo",
           title: "基础表格"
         },
         {

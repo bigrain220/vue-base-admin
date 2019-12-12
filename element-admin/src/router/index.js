@@ -23,13 +23,13 @@ export default new Router({
         },
         {
           path: 'index',
-          name: 'index',
-          component: () => import('@/view/one/index.vue'),
+          name: 'pageOne',
+          component: () => import('@/view/one/pageOne.vue'),
         },
         {
-          path: 'pageone',
-          name: 'pageOne',
-          component: () => import('@/view/two/pageone.vue'),
+          path: 'pageTwo',
+          name: 'pageTwo',
+          component: () => import('@/view/two/pageTwo.vue'),
         },
 
 

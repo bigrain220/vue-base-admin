@@ -1,12 +1,12 @@
 <template>
-  <div>
-  <el-button type="primary" size="medium">page1</el-button>
+  <div class="page-two">
+  <el-button type="primary" size="medium">page2</el-button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "pageOne",
+  name: "pageTwo",
   data() {
     return {};
   }

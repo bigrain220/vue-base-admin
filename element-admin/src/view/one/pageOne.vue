@@ -1,5 +1,5 @@
 <template>
-  <div class="index">
+  <div class="page-one">
   <el-button type="primary" size="medium">index</el-button>
   <div style="width:100%;height:1500px;background:pink;">11
   </div>
@@ -8,14 +8,20 @@
 
 <script>
 export default {
-  name: "Index",
+  name: "pageOne",
   data() {
     return {};
+  },
+  methods:{
+
+  },
+  mounted(){
+
   }
 };
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
