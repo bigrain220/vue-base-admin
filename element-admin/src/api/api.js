@@ -18,10 +18,10 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 // axios.defaults.withCredentials = true; //用axios发送post请求自动set cookie
 
 //加上 .then(res=>res.data)是返回接口数据，不加则返回全部response
-export default function(method,url,data){
+export default function(method,url,data = null,config=null){
   method = method.toLowerCase();
   if (method == 'post') {
-    return axios.post(url, qs.stringify(data)).then(res=>res.data)
+    return axios.post(url, qs.stringify(data),config).then(res=>res.data)
   } else if (method == 'get') {
       return axios.get(url, { params: data }).then(res=>res.data)
   } else if (method == 'delete') {

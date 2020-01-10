@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {getTags} from "@/api/indexApi"
+import {getTags,getSession} from "@/api/indexApi"
 export default {
   name: "pageOne",
   data() {
@@ -20,6 +20,9 @@ export default {
    getTags({language:'zh'}).then(res=>{
      console.log(res)
    })
+  //  getSession({identity_token:""}).then(res=>{
+  //    console.log(res)
+  //  })
   }
 };
 </script>
