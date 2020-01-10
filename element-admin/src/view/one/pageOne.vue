@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import {getTags} from "@/api/indexApi"
 export default {
   name: "pageOne",
   data() {
@@ -16,7 +17,9 @@ export default {
 
   },
   mounted(){
-
+   getTags({language:'zh'}).then(res=>{
+     console.log(res)
+   })
   }
 };
 </script>

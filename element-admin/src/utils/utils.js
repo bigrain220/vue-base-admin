@@ -1,11 +1,11 @@
 export default {
-    setCookie(cname, cvalue, exminutes) {
+    setCookie:function(cname, cvalue, exminutes) {
       var d = new Date();
       d.setTime(d.getTime() + (exminutes * 60 * 1000));
       var expires = "expires=" + d.toGMTString();
       document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     },
-    getCookie(cname) {
+    getCookie:function(cname) {
       var name = cname + "=";
       var decodedCookie = decodeURIComponent(document.cookie);
       var ca = decodedCookie.split(';');
@@ -20,10 +20,10 @@ export default {
       }
       return "";
     },
-    clearCookie(cname) {
+    clearCookie:function(cname) {
       this.setCookie(cname, "", -1);
     },
-    getLocalTime(timestamp) {
+    getLocalTime:function(timestamp) {
       // 如果以秒为单位
       // var dateObj = new Date(timestamp * 1000);
       // 如果以毫秒为单位
@@ -35,7 +35,5 @@ export default {
         ((dateObj.getMinutes() > 9) ? dateObj.getMinutes() : '0' + dateObj.getMinutes()) + ':' +
         ((dateObj.getSeconds() > 9) ? dateObj.getSeconds() : '0' + dateObj.getSeconds());
     },
-   
-  
   
   }
