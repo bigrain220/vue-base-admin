@@ -6,7 +6,19 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data(){
+    return{
+
+    }
+  },
+  methods: {
+    
+  },
+  mounted () {
+    document.querySelector('#index_loading').style.display="none";
+  }
+  
 }
 </script>
 
