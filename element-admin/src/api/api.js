@@ -34,6 +34,24 @@ export default function(method,url,data = null,config=null){
   }
 }
 
+// export default function(method, url, data = null, config = null) {
+//   var method = method.toLowerCase();
+//   var options = {
+//     get() {
+//       return axios.get(url, { params: data }).then(res => res.data);
+//     },
+//     post() {
+//       return axios.post(url, qs.stringify(data), config).then(res => res.data);
+//     },
+//     delete() {
+//       return axios.delete(url, { params: data }).then(res=>res.data);
+//     },
+//     put() {
+//       return axios.put(url,qs.stringify(data)).then(res=>res.data);
+//     }
+//   };
+//    return options[method]();
+// }
 
 //如果直接输出 则按下面的方式：
 // export default {
