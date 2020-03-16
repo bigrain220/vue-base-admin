@@ -27,15 +27,10 @@ export default {
     // 侧边栏折叠
     collapseChage() {
       this.collapseAction(!this.collapse);
-      this.$center.$emit("isCollapse",this.collapse);
     },
     logout() {
       this.$router.push("/logout");
     }
-  },
-  mounted() {
-    //页面刷新时侧边栏折叠状态
-     this.$center.$emit("isCollapse",this.collapse);
   },
   computed:{
     collapse:function(){

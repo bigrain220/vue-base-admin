@@ -30,7 +30,7 @@ export default {
 .content-header {
   width: 100%;
   position: fixed;
-  top: 70px;
+  top: 0;
   z-index: 999;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);

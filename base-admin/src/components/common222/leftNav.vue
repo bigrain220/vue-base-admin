@@ -1,6 +1,7 @@
 <template>
   <div id="sidebar">
     <el-menu class="sidebar-el-menu" router :defaultOpeneds="['config']" :default-active="onRoutes" :collapse="collapse" background-color="#fff" text-color="#434444" active-text-color="#29e">
+      <div class="collapse-btn" @click="change"><span class="nav-text" v-show="!collapse">网站导航</span><i :class="[collapse==true?'l el-icon-s-unfold':'r el-icon-s-fold']"></i></div>
       <template v-for="item in items">
         <template v-if="item.subs">
           <el-submenu :index="item.index" :key="item.index">
@@ -29,10 +30,10 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      // collapse: false,
       items: [
         {
           icon: "el-icon-user",
@@ -67,12 +68,18 @@ export default {
       ]
     };
   },
+  methods: {
+    ...mapActions(["collapseAction"]),
+    change() {
+      this.collapseAction(!this.collapse);
+    }
+  },
   computed: {
     onRoutes() {
       return this.$route.path;
     },
-     collapse:function(){
-      return this.$store.state.isCollapse
+    collapse: function() {
+      return this.$store.state.isCollapse;
     }
   },
 };
@@ -83,12 +90,41 @@ export default {
   display: block;
   position: fixed;
   left: 0;
-  top: 70px;
+  top: 0px;
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
   background: #fff;
   font-size: 12px;
+  .collapse-btn {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #f2f3f4;
+    color: #323437;
+    text-align: center;
+    border-bottom: 1px solid #e1e3e4;
+    padding: 0 20px;
+    cursor: pointer;
+    .nav-text {
+      float: left;
+      margin-left: 22px;
+      font-size: 14px;
+    }
+    i{
+      width: 24px;
+      font-size: 18px;
+      height: 40px;
+      line-height: 40px;
+    }
+    i.l{
+      margin-right: 5px;
+    }
+    i.r{
+      text-align: right;
+      margin-right:0;
+    }
+  }
 }
 .sidebar-el-menu {
   border-right: 1px solid #e6e6e6 !important;

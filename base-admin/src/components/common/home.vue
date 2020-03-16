@@ -21,20 +21,21 @@ export default {
   components: { Header, leftNav },
   data() {
     return {
-      collapse:false
+      // collapse:false
     };
   },
   methods:{
     
   },
   created(){
-     this.$center.$on("isCollapse", val => {
-       this.collapse = val;
-    });
+    //  this.$center.$on("isCollapse", val => {
+    //    this.collapse = val;
+    // });
   },
-  mounted(){
-
-
+  computed:{
+    collapse:function(){
+      return this.$store.state.isCollapse
+    }
   }
 };
 </script>
