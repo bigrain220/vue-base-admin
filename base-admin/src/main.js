@@ -3,12 +3,12 @@
 import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
-import router from './router'
+import router from './router/router'
 import store from '@/vuex/store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import utils from '@/utils/utils.js'
-import { Message } from 'element-ui';
+// import utils from '@/utils/utils.js'
+// import { Message } from 'element-ui';
 
 
 Vue.config.productionTip = false;
@@ -36,9 +36,7 @@ Vue.prototype.$center = new Vue() //非父子组件传值
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
   store,
-  components: { App },
-  template: '<App/>'
-})
+  render: h => h(App)
+}).$mount('#app')

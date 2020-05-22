@@ -157,7 +157,6 @@ export default {
         type: "warning"
       })
         .then(() => {
-          console.log(id)
           // MentDelete({ id: id }).then(res => {
           //   if (res.code === 1) {
           //     this.$message.success("删除成功!");
@@ -232,7 +231,6 @@ export default {
     getMentList(params) {
       this.total = this.response.total;
       this.tableData = this.response.rows;
-      console.log(params)
       // MentList(params).then(res => {
       //   // console.log(res);
       //   this.total = res.total;
