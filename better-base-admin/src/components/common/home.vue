@@ -2,7 +2,7 @@
   <div class="main">
     <Header></Header>
     <leftNav></leftNav>
-    <div class="content" :class="{'content-collapse':collapse}">
+    <div class="content" :class="{'content-collapse':isCollapse}">
       <div class="content-box">
         <transition name="move" mode="out-in">
           <router-view></router-view>
@@ -16,26 +16,22 @@
 <script>
 import Header from "./header";
 import leftNav from "./leftNav";
+import { mapGetters } from "vuex";
 export default {
   name: "Home",
   components: { Header, leftNav },
   data() {
     return {
-      // collapse:false
+   
     };
   },
   methods:{
     
   },
   created(){
-    //  this.$center.$on("isCollapse", val => {
-    //    this.collapse = val;
-    // });
   },
   computed:{
-    collapse:function(){
-      return this.$store.state.isCollapse
-    }
+    ...mapGetters(["isCollapse"])
   }
 };
 </script>

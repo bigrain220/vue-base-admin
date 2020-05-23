@@ -2,7 +2,7 @@
   <div id="header">
     <!-- 折叠按钮 -->
     <div class="collapse-btn" @click="collapseChage">
-      <i v-if="!collapse" class="el-icon-s-fold"></i>
+      <i v-if="!isCollapse" class="el-icon-s-fold"></i>
       <i v-else class="el-icon-s-unfold"></i>
     </div>
     <div class="logo">结算中心后台</div>
@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { logoutAPI } from "@/api/userAccount/index";
 export default {
   name: "Header",
@@ -25,7 +25,7 @@ export default {
     ...mapActions(["collapseAction"]),
     // 侧边栏折叠
     collapseChage() {
-      this.collapseAction(!this.collapse);
+      this.collapseAction(!this.isCollapse);
     },
     logout() {
       this.$router.push({ path: "/login" });
@@ -38,9 +38,10 @@ export default {
     }
   },
   computed: {
-    collapse: function() {
-      return this.$store.state.isCollapse;
-    }
+    ...mapGetters(["isCollapse"])
+  },
+  mounted() {
+   
   }
 };
 </script>

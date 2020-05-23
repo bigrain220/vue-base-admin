@@ -29,7 +29,7 @@ export default {
     getTagsAPI({ language: "zh" }).then(res => {
       this.tagsData = res.data;
     });
-  }
+  },
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="sidebar">
-    <el-menu class="sidebar-el-menu" router :defaultOpeneds="['config']" :default-active="onRoutes" :collapse="collapse" background-color="#fff" text-color="#434444" active-text-color="#29e">
+    <el-menu class="sidebar-el-menu" router :defaultOpeneds="['config']" :default-active="onRoutes" :collapse="isCollapse" background-color="#fff" text-color="#434444" active-text-color="#29e">
       <template v-for="item in items">
         <template v-if="item.subs">
           <el-submenu :index="item.index" :key="item.index">
@@ -29,10 +29,10 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      // collapse: false,
       items: [
         {
           icon: "el-icon-user",
@@ -71,9 +71,7 @@ export default {
     onRoutes() {
       return this.$route.path;
     },
-     collapse:function(){
-      return this.$store.state.isCollapse
-    }
+    ...mapGetters(["isCollapse"])
   },
 };
 </script>
