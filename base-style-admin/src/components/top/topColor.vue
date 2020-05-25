@@ -10,9 +10,9 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 const version = require("element-ui/package.json").version; // element-ui version from node_modules
 const ORIGINAL_THEME = "#409EFF"; // default color
-
 export default {
   data() {
     return {
@@ -22,11 +22,15 @@ export default {
   },
   watch: {
     theme(val, oldVal) {
+      this.colorNameAction(val);
       this.updateTheme(val, oldVal);
     }
   },
-
+  computed: {
+    ...mapGetters(["colorName"])
+  },
   methods: {
+    ...mapActions(["colorNameAction"]),
     updateTheme(val, oldVal) {
       if (typeof val !== "string") return;
       const themeCluster = this.getThemeCluster(val.replace("#", ""));
@@ -78,10 +82,6 @@ export default {
           originalCluster,
           themeCluster
         );
-      });
-      this.$message({
-        message: "换肤成功",
-        type: "success"
       });
     },
     updateStyle(style, oldCluster, newCluster) {
@@ -147,6 +147,9 @@ export default {
       clusters.push(shadeColor(theme, 0.1));
       return clusters;
     }
+  },
+  created() {
+    this.theme = this.colorName; 
   }
 };
 </script>
