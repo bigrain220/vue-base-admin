@@ -7,9 +7,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title><%= htmlWebpackPlugin.options.title %></title>
-  <link rel="stylesheet" href="<%= BASE_URL %>css/iconfont.css">
-  <link rel="stylesheet" href="<%= BASE_URL %>css/common.css">
-  <link href="<%= BASE_URL %>cdn/element/theme/index.css" rel="stylesheet">
+  <link rel="stylesheet" href="<%= BASE_URL %>cdn/iconfont/iconfont.css">
+  <link href="<%= BASE_URL %>cdn/element-ui/theme/index.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,7 +35,7 @@
       document.write(unescape("%3Cscript src='<%= BASE_URL %>cdn/axios/0.19.2/axios.js'%3E%3C/script%3E"))
     }
     if (typeof ELEMENT == 'undefined') {
-      document.write(unescape("%3Cscript src='<%= BASE_URL %>cdn/element/2.13.2.element.index.js'%3E%3C/script%3E"))
+      document.write(unescape("%3Cscript src='<%= BASE_URL %>cdn/element-ui/2.13.2.element.index.js'%3E%3C/script%3E"))
     }
   </script>
   <div id="app"></div>
