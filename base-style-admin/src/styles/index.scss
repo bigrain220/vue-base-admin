@@ -1,8 +1,8 @@
 
-//通用配置
-@import './normalize.scss';
+
 // ele样式覆盖
 @import './element-ui.scss';
+
 
 // 滚动条样式
 ::-webkit-scrollbar{width:8px;height:8px}

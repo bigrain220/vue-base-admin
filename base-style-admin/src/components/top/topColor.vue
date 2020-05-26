@@ -1,5 +1,5 @@
 <template>
-  <el-tooltip effect="dark" content="theme" placement="bottom">
+  <el-tooltip effect="dark" content="变色" placement="bottom">
     <el-color-picker
       v-model="theme"
       class="theme-picker"
