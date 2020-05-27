@@ -58,7 +58,7 @@ export default {
   height: 70px;
   font-size: 22px;
   color: #fff;
-  background: #0173b2;
+  background: rgb(28, 109, 156);
 }
 .collapse-btn {
   float: left;

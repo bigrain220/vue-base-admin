@@ -8,6 +8,8 @@ import App from './App'
 import router from '@/router/router.js'
 import store from '@/store/index'
 
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 import '@/styles/index.scss' // global css
 
@@ -31,7 +33,14 @@ Vue.prototype.$center = new Vue() //非父子组件传值
 //     next();
 //   }
 // });
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+  next()
+})
 
+router.afterEach(() => {
+  NProgress.done()
+})
 
 
 /* eslint-disable no-new */
