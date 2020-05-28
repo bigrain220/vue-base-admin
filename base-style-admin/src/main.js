@@ -5,7 +5,7 @@
 import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
-import router from '@/router/router.js'
+import router from '@/router'
 import store from '@/store/index'
 
 import NProgress from 'nprogress'
