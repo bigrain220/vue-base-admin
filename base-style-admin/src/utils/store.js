@@ -1,7 +1,9 @@
 import {
     validatenull
 } from '@/utils/validate';
-
+import {
+    getLocalTime
+} from '@/utils/utils';
 const keyName = 'admin' + '-';
 /**
  * 存储Storage
@@ -17,7 +19,7 @@ export const setStorage = (params = {}) => {
         dataType: typeof (content),
         content: content,
         type: type,
-        datetime: new Date().getTime()
+        datetime: getLocalTime(new Date().getTime())
     }
     if (type) window.sessionStorage.setItem(name, JSON.stringify(obj));
     else window.localStorage.setItem(name, JSON.stringify(obj));

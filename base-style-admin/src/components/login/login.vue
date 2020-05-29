@@ -39,6 +39,7 @@ export default {
           this.loading = true;
           // var params = this.loginForm;
           //  loginAPI(params).then(rs => {
+          //    console.log(rs)
           //     this.loading = false;
           //  })
           this.$router.push({ path: "/admin/index" });
@@ -47,7 +48,9 @@ export default {
       });
     }
   },
-  mounted() {}
+  mounted() {
+      //  this.$axios.get('/login', {}).then(res=>console.log(res))
+  }
 };
 </script>
 <style lang="scss" scoped>

@@ -7,16 +7,18 @@ import Vue from 'vue'
 import App from './App'
 import router from '@/router'
 import store from '@/store/index'
-
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 import '@/styles/index.scss' // global css
 
 
-
 Vue.prototype.$center = new Vue() //非父子组件传值
 
+//使用mock
+import axios from 'axios';
+Vue.prototype.$axios = axios 
+import "@/mock/index"
 
 // router.beforeEach((to, from, next) => {
 //   if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
@@ -33,6 +35,7 @@ Vue.prototype.$center = new Vue() //非父子组件传值
 //     next();
 //   }
 // });
+
 router.beforeEach((to, from, next) => {
   NProgress.start()
   next()
