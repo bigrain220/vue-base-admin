@@ -1,9 +1,10 @@
-import {SET_COLLAPSE,SET_COLOR_NAME} from "../types";
+import {SET_COLLAPSE,SET_COLOR_NAME,SET_THEME_NAME} from "../types";
 import {setStorage,getStorage} from '@/utils/store'
 const common={
     state:{
         isCollapse:getStorage({name: 'isCollapse'}) || false,
         colorName:getStorage({name: 'colorName'}) || '#409EFF',
+        themeName:getStorage({name: 'themeName'}) || 'theme-default',
     },
     // getters:{
     //     getCollapse(state){
@@ -25,7 +26,14 @@ const common={
                 name: 'colorName',
                 content: state.colorName,
               })
-          }
+        },
+        [SET_THEME_NAME]: (state, themeName) => {
+            state.themeName = themeName;
+            setStorage({
+              name: 'themeName',
+              content: state.themeName,
+            })
+        },
       },
     actions:{
         collapseAction({commit},params){
@@ -33,6 +41,9 @@ const common={
         },
         colorNameAction({commit},params){
             commit(SET_COLOR_NAME, params);
+        },
+        themeNameAction({commit},params){
+            commit(SET_THEME_NAME, params);
         }
     }
 }

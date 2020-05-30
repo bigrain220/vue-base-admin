@@ -8,8 +8,19 @@
     <div class="logo">后台管理系统</div>
     <div class="header-right">
       <div class="header-user-con">
-        <top-color></top-color>
-        <el-button type="text" @click="logout">安全退出</el-button>
+        <el-tooltip effect="dark" content="变色" placement="bottom">
+          <div>
+            <top-color></top-color>
+          </div>
+        </el-tooltip>
+        <el-tooltip effect="dark" content="换肤" placement="bottom">
+          <div>
+            <topTheme></topTheme>
+          </div>
+        </el-tooltip>
+        <div>
+          <el-button type="text" @click="logout">安全退出</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -19,8 +30,9 @@ import { mapGetters, mapActions } from "vuex";
 import { logoutAPI } from "@/api/userAccount/index";
 export default {
   name: "Header",
-  components:{
-    topColor:()=>import('@/components/top/topColor')
+  components: {
+    topColor: () => import("@/components/top/topColor"),
+    topTheme: () => import("@/components/top/topTheme")
   },
   data() {
     return {};
@@ -44,13 +56,11 @@ export default {
   computed: {
     ...mapGetters(["isCollapse"])
   },
-  mounted() {
-   
-  }
+  mounted() {}
 };
 </script>
 
-<style scoped>
+<style lang="scss">
 #header {
   position: relative;
   box-sizing: border-box;
@@ -59,28 +69,33 @@ export default {
   font-size: 22px;
   color: #fff;
   background: rgb(28, 109, 156);
-}
-.collapse-btn {
-  float: left;
-  padding: 0 21px;
-  cursor: pointer;
-  line-height: 70px;
-}
-#header .logo {
-  float: left;
-  width: 250px;
-  line-height: 70px;
-}
-.header-right {
-  float: right;
-  padding-right: 50px;
-}
-.header-user-con {
-  display: flex;
-  height: 70px;
-  align-items: center;
-}
-.header-user-con >>> span {
-  color: #fff;
+  .collapse-btn {
+    float: left;
+    padding: 0 21px;
+    cursor: pointer;
+    line-height: 70px;
+  }
+  .logo {
+    float: left;
+    width: 250px;
+    line-height: 70px;
+  }
+  .header-right {
+    float: right;
+    padding-right: 50px;
+    .header-user-con {
+      display: flex;
+      height: 70px;
+      width: 100%;
+      align-items: center;
+      & > div {
+        margin-left: 20px;
+        cursor: pointer;
+      }
+      span {
+        color: #fff;
+      }
+    }
+  }
 }
 </style>>

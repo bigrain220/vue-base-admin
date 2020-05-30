@@ -1,12 +1,10 @@
 <template>
-  <el-tooltip effect="dark" content="变色" placement="bottom">
     <el-color-picker
       v-model="theme"
       class="theme-picker"
       size="small"
       popper-class="theme-picker-dropdown"
     />
-  </el-tooltip>
 </template>
 
 <script>
