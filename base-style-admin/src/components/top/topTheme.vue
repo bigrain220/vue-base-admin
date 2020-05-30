@@ -9,7 +9,7 @@
         </el-row>
       </el-radio-group>
     </el-dialog>
-      <i class="el-icon-s-open" @click="open"></i>
+      <i class="iconfont icontheme" @click="open"></i>
   </div>
 </template>
 

@@ -23,7 +23,7 @@ export default {
     };
   },
   methods: {
-   
+     
   },
   mounted() {
     getTagsAPI({ language: "zh" }).then(res => {

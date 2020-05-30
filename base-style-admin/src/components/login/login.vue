@@ -6,7 +6,7 @@
         <el-input type="text" prefix-icon="iconfont iconzhanghao" v-model="loginForm.username" placeholder="用户名" auto-complete="on"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input type="password" prefix-icon="iconfont iconmima" v-model="loginForm.password" placeholder="密码" @keydown.enter.native="handleSubmit"></el-input>
+        <el-input type="password" prefix-icon="iconfont iconiconfonticon-mima" v-model="loginForm.password" placeholder="密码" @keydown.enter.native="handleSubmit"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" size="medium" style="width:100%" @click.native.prevent="handleSubmit" :loading="loading">立即登录</el-button>
@@ -49,7 +49,7 @@ export default {
     }
   },
   mounted() {
-      //  this.$axios.get('/login', {}).then(res=>console.log(res))
+
   }
 };
 </script>

@@ -18,8 +18,13 @@
             <topTheme></topTheme>
           </div>
         </el-tooltip>
+        <el-tooltip effect="dark" content="语言" placement="bottom">
+          <div>
+            <top-lang></top-lang>
+          </div>
+        </el-tooltip>
         <div>
-          <el-button type="text" @click="logout">安全退出</el-button>
+          <el-button type="text" @click="logout">{{$t("logout")}}</el-button>
         </div>
       </div>
     </div>
@@ -32,7 +37,8 @@ export default {
   name: "Header",
   components: {
     topColor: () => import("@/components/top/topColor"),
-    topTheme: () => import("@/components/top/topTheme")
+    topTheme: () => import("@/components/top/topTheme"),
+    topLang: () => import("@/components/top/topLang")
   },
   data() {
     return {};
@@ -87,12 +93,15 @@ export default {
       display: flex;
       height: 70px;
       width: 100%;
+      font-size: 14px;
       align-items: center;
       & > div {
         margin-left: 20px;
         cursor: pointer;
       }
-      span {
+      span,
+      i {
+        font-size: 16px;
         color: #fff;
       }
     }
