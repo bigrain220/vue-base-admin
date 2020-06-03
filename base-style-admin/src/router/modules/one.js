@@ -8,8 +8,13 @@ var one = [{
         component: () => import('@/components/login/login'),
     },
     {
+        path: '/404',
+        name: 'Page404',
+        component: () => import('@/components/common/Page404'),
+    },
+    {
         path: '*',
-        redirect: '/admin/404',
+        redirect: '/404',
         hidden: true
     }
 ]

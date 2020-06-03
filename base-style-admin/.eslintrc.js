@@ -16,5 +16,6 @@ module.exports = {
   },
   globals: {
     "ELEMENT": true,
+    "axios": true,
   },
 }

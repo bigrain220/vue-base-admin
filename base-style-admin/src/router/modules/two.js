@@ -1,11 +1,7 @@
 var two = [{
     path: '/admin',
     component: resolve => require(['@/components/common/home'], resolve),
-    children: [{
-            path: '404',
-            name: 'notFoundPage',
-            component: () => import('@/components/common/404'),
-        },
+    children: [
         {
             path: 'index',
             name: 'userAccount',

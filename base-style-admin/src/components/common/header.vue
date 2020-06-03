@@ -8,6 +8,11 @@
     <div class="logo">后台管理系统</div>
     <div class="header-right">
       <div class="header-user-con">
+        <el-tooltip effect="dark" content="错误日志" placement="bottom">
+          <div>
+            <top-logs></top-logs>
+          </div>
+        </el-tooltip>
         <el-tooltip effect="dark" content="变色" placement="bottom">
           <div>
             <top-color></top-color>
@@ -38,7 +43,8 @@ export default {
   components: {
     topColor: () => import("@/components/top/topColor"),
     topTheme: () => import("@/components/top/topTheme"),
-    topLang: () => import("@/components/top/topLang")
+    topLang: () => import("@/components/top/topLang"),
+    topLogs: () => import("@/components/top/topLogs")
   },
   data() {
     return {};
@@ -96,7 +102,7 @@ export default {
       font-size: 14px;
       align-items: center;
       & > div {
-        margin-left: 20px;
+        margin-left: 25px;
         cursor: pointer;
       }
       span,

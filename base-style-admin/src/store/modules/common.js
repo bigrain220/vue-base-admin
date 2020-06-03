@@ -1,4 +1,3 @@
-import {SET_COLLAPSE,SET_COLOR_NAME,SET_THEME_NAME,SET_LANGUAGE} from "../types";
 import {setStorage,getStorage} from '@/utils/store'
 const common={
     state:{
@@ -8,7 +7,7 @@ const common={
         language: getStorage({name: 'language'}) || 'zh',
     },
     mutations: {
-        [SET_COLLAPSE](state,params){
+        SET_COLLAPSE(state,params){
           state.isCollapse = params;
           setStorage({
             name: 'isCollapse',
@@ -16,21 +15,21 @@ const common={
             type:"session"
           })
         },
-        [SET_COLOR_NAME](state,params){
+        SET_COLOR_NAME(state,params){
             state.colorName = params;
             setStorage({
                 name: 'colorName',
                 content: state.colorName,
               })
         },
-        [SET_THEME_NAME]: (state, themeName) => {
+        SET_THEME_NAME: (state, themeName) => {
             state.themeName = themeName;
             setStorage({
               name: 'themeName',
               content: state.themeName,
             })
         },
-        [SET_LANGUAGE]: (state, language) => {
+        SET_LANGUAGE: (state, language) => {
           state.language = language
           setStorage({
             name: 'language',
@@ -40,16 +39,16 @@ const common={
       },
     actions:{
         collapseAction({commit},params){
-            commit(SET_COLLAPSE, params);
+            commit('SET_COLLAPSE', params);
         },
         colorNameAction({commit},params){
-            commit(SET_COLOR_NAME, params);
+            commit('SET_COLOR_NAME', params);
         },
         themeNameAction({commit},params){
-            commit(SET_THEME_NAME, params);
+            commit('SET_THEME_NAME', params);
         },
         languageAction({commit},params){
-          commit(SET_LANGUAGE, params);
+          commit('SET_LANGUAGE', params);
       }
     }
 }

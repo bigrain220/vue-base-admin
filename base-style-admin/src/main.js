@@ -12,18 +12,10 @@ import 'nprogress/nprogress.css'
 import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 import '@/styles/index.scss' // global css
 import i18n from './lang' // Internationalization
+import '@/utils/error-log' // error log
 
 Vue.prototype.$center = new Vue() //非父子组件传值
 
-
-Vue.use(ELEMENT, {
-  i18n: (key, value) => i18n.t(key, value)
-})
-
-// Vue.use(Element, {
-//   size: Cookies.get('size') || 'medium', // set element-ui default size
-//   locale: enLang // 如果使用中文，无需设置，请删除
-// })
 
 // router.beforeEach((to, from, next) => {
 //   if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
