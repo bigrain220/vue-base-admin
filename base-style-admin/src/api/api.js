@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "development") {
 
 let baseUrl = base + '/api';
 axios.defaults.timeout = 6000;
-axios.defaults.baseURL = baseUrl;
+// axios.defaults.baseURL = baseUrl;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.withCredentials = true; //发送请求自动set cookie || 跨域请求，允许保存cookie
 
