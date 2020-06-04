@@ -10,7 +10,7 @@ const res = {
     value: 2222
   }],
   two: new Array(10).fill({name:'xiaoming',value:"18"}),
-  three: new Array(5).fill({name:'threes',value:"18"})
+  three: new Array(5).fill({name:'threes',value:"16"})
 }
 
 module.exports = res
