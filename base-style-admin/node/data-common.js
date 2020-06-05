@@ -1,16 +1,25 @@
 const res = {
-  one: [{
-    name: 1,
-    value: 2
-  }, {
-    name: 11,
-    value: 22
-  }, {
-    name: 111,
-    value: 2222
-  }],
-  two: new Array(10).fill({name:'xiaoming',value:"18"}),
-  three: new Array(5).fill({name:'threes',value:"16"})
+  '/getTest1': {
+    methods: 'get',
+    data: new Array(10).fill({
+      name: 'xiaoming',
+      value: "1"
+    })
+  },
+  '/getTest2': {
+    methods: 'get',
+    data: new Array(10).fill({
+      name: 'xiaoming',
+      value: "2"
+    })
+  },
+  '/getTest3': {
+    methods: 'post',
+    data: new Array(10).fill({
+      name: 'xiaoming',
+      value: "3"
+    })
+  },
 }
 
 module.exports = res
