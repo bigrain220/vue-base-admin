@@ -1,4 +1,7 @@
-// CMD运行:   nodemon start.js
+//  全局安装，不然路径有问题 npm install nodemon -g
+// CMD运行 nodemon start.js
+//  全局安装 npm install concurrently -g 然后可以运行package.json中的指令
+
 const app = require('./http')
 const dataCommon = require('./data-common')
 const bodyParser = require('body-parser')
