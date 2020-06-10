@@ -33,15 +33,6 @@ export default {
       // nodeApi.getTest1({}).then(res => {
       //    console.log('test1:',res)
       // });
-      //  nodeApi.getTest2({name:1}).then(res => {
-      //    console.log('test2:',res)
-      // });
-      // nodeApi.getTest3({}).then(res => {
-      //    console.log('test3:',res)
-      // });
-      //  nodeApi.getTestUser({name:'1111111'}).then(res => {
-      //    console.log('getTestUser:',res)
-      // });
     }
   },
   mounted() {

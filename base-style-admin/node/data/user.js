@@ -1,18 +1,19 @@
 const res = {
-  '/getTest3': {
-    methods: 'get',
-    data: new Array(10).fill({
-      name: 'xiaoming',
-      value: "33"
-    })
-  },
-  '/getTestUser': {
+  '/login': {
     methods: 'post',
-    data: new Array(4).fill({
-      name: 'getTestUser',
-      value: "getTestUser"
-    })
+    data: {
+      status:'1',
+      data:[]
+    }
   },
+  '/logout': {
+    methods: 'post',
+    data: {
+      status:'1',
+      data:[]
+    }
+  }
+
 }
 
 module.exports = res

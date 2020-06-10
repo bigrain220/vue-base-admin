@@ -16,7 +16,7 @@
 </template>
 
 <script>
-// import { loginAPI } from "@/api/userAccount/index";
+import { loginAPI } from "@/api/userAccount/index";
 export default {
   name: "login",
   data() {
@@ -37,13 +37,17 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          // var params = this.loginForm;
-          //  loginAPI(params).then(rs => {
-          //    console.log(rs)
-          //     this.loading = false;
-          //  })
-          this.$router.push({ path: "/admin/index" });
-          this.$message.success("登录成功！");
+          var params = this.loginForm;
+          loginAPI(params).then(res => {
+            if(res.status=='1'){
+              this.loading = false;
+              this.$router.push({ path: "/admin/index" });
+              this.$message.success("登录成功！");
+            }else{
+              this.$message.error("登录失败！");
+            }
+          })
+         
         }
       });
     }

@@ -57,10 +57,12 @@ export default {
     },
     logout() {
       this.$router.push({ path: "/login" });
-      logoutAPI().then(rs => {
-        if (rs) {
-          this.$message.warning("已退出，请重新登录");
+      logoutAPI().then(res => {
+        if (res.status=='1') {
+          this.$message.warning("退出成功！");
           this.$router.push({ path: "/login" });
+        }else{
+           this.$message.error("退出失败！");
         }
       });
     }
