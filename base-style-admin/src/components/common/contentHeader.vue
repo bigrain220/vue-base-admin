@@ -20,8 +20,10 @@ export default {
   },
   methods: {},
   mounted() {
-    var height = this.$refs.contentHeader.offsetHeight;
-    document.querySelector(".every-page-box").style.marginTop= height + 20 + "px";
+     this.$nextTick(()=>{
+        var height = document.querySelector('.content-header').offsetHeight;
+      document.querySelector(".every-page-box").style.marginTop= height + 20 + "px";
+    })
   }
 };
 </script>

@@ -8,6 +8,8 @@
         <button @click="incrementAsync">延时增加</button>
         <p>{{count}}</p>
         <p>{{isEvenOrOdd}}</p>
+        <el-input v-model="title"></el-input>
+        <div style="height:1000px;"></div>
       </div>
     </div>
   </div>
@@ -28,9 +30,14 @@ export default {
   methods: {
      ...mapActions(["increment","decrement","incrementAsync"]),
   },
-  mounted() {},
+  mounted() {
+    console.log(this.$route)
+  },
   computed:{
     ...mapGetters(['count','isEvenOrOdd'])
+  },
+  activated(){
+    console.log(1)
   }
 };
 </script>
