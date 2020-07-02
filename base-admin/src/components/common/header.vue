@@ -28,12 +28,13 @@ export default {
       this.collapseAction(!this.isCollapse);
     },
     logout() {
-      this.$router.push({ path: "/login" });
       logoutAPI().then(rs => {
         if (rs) {
           this.$message.warning("已退出，请重新登录");
           this.$router.push({ path: "/login" });
         }
+      }).catch(()=>{
+         this.$router.push({ path: "/login" });
       });
     }
   },

@@ -4,13 +4,14 @@
     <leftNav></leftNav>
     <div class="content" :class="{'content-collapse':isCollapse}">
       <div class="content-box">
-        <!-- transition 和keep-alive一起用回失效，暂没发现原因  -->
-        <!-- <transition name="move" mode="out-in"> -->
-          <keep-alive>
-            <router-view v-if="$route.meta.keepAlive"/>
+        <transition name="move" mode="out-in">
+          <!-- keep-alive 的 include 默认是优先匹配组件的 name ，所以在编写路由 router 和路由对应的 view component 的时候一定要确保 两者的 name 是完全一致的。-->
+          <!-- 默认如果不写 name 就不会被缓存 -->
+          <!-- (切记 name 命名时候尽量保证唯一性 切记不要和某些组件的命名重复了，不然会递归引用最后内存溢出等问题) --> 
+          <keep-alive :include="['order','payWay']">
+            <router-view :key="$route.path" />
           </keep-alive>
-          <router-view v-if="!$route.meta.keepAlive"/>
-        <!-- </transition> -->
+        </transition>
         <el-backtop target=".content-box"></el-backtop>
       </div>
     </div>

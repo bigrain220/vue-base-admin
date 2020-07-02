@@ -1,23 +1,14 @@
 import axios from 'axios';
 import qs from 'qs';
-// import utils from '@/utils/utils.js'
-// import router from '@/router/router.js'
-// import {
-//   MessageBox
-// } from 'element-ui'
+import {getCookie} from '@/utils/utils.js'
+import router from '@/router/'
+import {
+  MessageBox
+} from 'element-ui'
 
-var base = "";
-if (process.env.NODE_ENV === "development") {
-  //开发环境
-  base = 'https://apilightmv.aoscdn.com';
-} else if (process.env.NODE_ENV === "production") {
-  //生产环境
-  base = '//' + document.domain;
-}
 
-let baseUrl = base + '/api';
+
 axios.defaults.timeout = 6000;
-axios.defaults.baseURL = baseUrl;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.withCredentials = true; //发送请求自动set cookie || 跨域请求，允许保存cookie
 
@@ -40,34 +31,36 @@ export default function (method, url, data = null, config = null) {
   }
 }
 
-// let isLogin = true; //让弹窗只弹一次；
-// // respone拦截器
-// axios.interceptors.response.use(
-//   response => {
-//     // 对响应数据做点什么
-//     // console.log(response, 'response')
-//     if (response.config.url == baseUrl + '/login' || response.config.url == baseUrl + '/logout') {
-//       isLogin = true;
-//       return response;
-//     } else if ((response.data != "" && response.data.msg == 'FAILED_LOGIN') || (process.env.NODE_ENV === "production" ? utils.getCookie('ad_auth') == "" : false)) {
-//       if (isLogin == true) {
-//         isLogin = false;
-//         MessageBox.alert('您已下线，请重新登录', '下线提示', {
-//           confirmButtonText: '确定',
-//           callback: action => {
-//             router.push({
-//               path: '/login'
-//             })
-//           }
-//         });
-//       }
-//     } else {
-//       isLogin = true;
-//       return response;
-//     }
-//   },
-//   error => {
-//     console.log('err' + error) // for debug
-//     return Promise.reject(error)
-//   }
-// )
+
+
+let isLogin = true; //让弹窗只弹一次；
+// respone拦截器
+axios.interceptors.response.use(
+  response => {
+    // 对响应数据做点什么
+    console.log(response, 'response')
+    if (response.config.url ==  '/login' || response.config.url == '/logout') {
+      isLogin = true;
+      return response;
+    } else if ((response.data != "" && response.data.msg == 'FAILED_LOGIN') || (process.env.NODE_ENV === "production" ? getCookie('ad_auth') == "" : false)) {
+      if (isLogin == true) {
+        isLogin = false;
+        MessageBox.alert('您已下线，请重新登录', '下线提示', {
+          confirmButtonText: '确定',
+          callback: () => {
+            router.push({
+              path: '/login'
+            })
+          }
+        });
+      }
+    } else {
+      isLogin = true;
+      return response;
+    }
+  },
+  error => {
+    console.log('err' + error) // for debug
+    return Promise.reject(error)
+  }
+)

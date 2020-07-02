@@ -56,7 +56,6 @@ export default {
       this.collapseAction(!this.isCollapse);
     },
     logout() {
-      this.$router.push({ path: "/login" });
       logoutAPI().then(res => {
         if (res.status=='1') {
           this.$message.warning("退出成功！");

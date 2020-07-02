@@ -8,7 +8,6 @@ var two = [{
             component: () => import('@/view/accout/userAccount.vue'),
             meta: {
                 requireAuth: true,
-                keepAlive: false
             }
         },
         {
@@ -17,7 +16,6 @@ var two = [{
             component: () => import('@/view/order/order.vue'),
             meta: {
                 requireAuth: true,
-                keepAlive: true
             }
         },
         {

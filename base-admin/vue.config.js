@@ -14,8 +14,18 @@ module.exports = {
             'element-ui': 'ELEMENT'
         });
     },
-    devServer: {
-        port: 3030, // 端口
+      //参考链接： https://blog.csdn.net/Liu_yunzhao/article/details/90520028
+      devServer: {
+        port: '3030',
+        proxy: {
+            '/api': {
+                target: 'https://apilightmv.aoscdn.com',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': '/api'
+                }
+            }
+        }
     }
 
 };
