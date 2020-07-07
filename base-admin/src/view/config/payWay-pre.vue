@@ -37,9 +37,44 @@
       </div>
     </div>
     <!-- editDialog -->
-    <edit-add-dialog v-if="dialogVisible.editDialogVisible" :isShow.sync="dialogVisible.editDialogVisible" :data="editDialogData" :config="editConfig" :selectOptions="selectOptions"></edit-add-dialog>
+    <el-dialog title="编辑" :visible.sync="dialogVisible.editDialogVisible" class="payway-edit-dialog" @close="payWayDialogClose('edit')">
+      <el-form :model="editDialogData" label-width="100px" size="small" :rules="rules" ref="editDialogForm">
+        <el-form-item label="支付ID：">
+          <el-input v-model="editDialogData.id" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="名称：" prop="name">
+          <el-input v-model="editDialogData.name"></el-input>
+        </el-form-item>
+        <el-form-item label="状态：" prop="status">
+          <el-select v-model="editDialogData.status" placeholder="请选择">
+            <el-option v-for="item in selectOptions.status()" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div style="text-align:right;">
+        <el-button @click="dialogVisible.editDialogVisible = false" size="small">取 消</el-button>
+        <el-button type="primary" @click="submitForm('editDialogForm')" size="small">确 定</el-button>
+      </div>
+    </el-dialog>
     <!-- addDialog-->
-    <edit-add-dialog v-if="dialogVisible.addDialogVisible" :isShow.sync="dialogVisible.addDialogVisible" :data="addDialogData" :config="editConfig" :selectOptions="selectOptions"></edit-add-dialog>
+    <el-dialog title="添加" :visible.sync="dialogVisible.addDialogVisible" class="payway-add-dialog" @close="payWayDialogClose('add')">
+      <el-form :model="addDialogData" label-width="100px" size="small" :rules="rules" ref="addDialogForm">
+        <el-form-item label="支付名称：" prop="name">
+          <el-input v-model="addDialogData.name"></el-input>
+        </el-form-item>
+        <el-form-item label="状态：" prop="status">
+          <el-select v-model="addDialogData.status" placeholder="请选择">
+            <el-option v-for="item in selectOptions.status()" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div style="text-align:right;">
+        <el-button @click="dialogVisible.addDialogVisible = false" size="small">取 消</el-button>
+        <el-button type="primary" @click="submitForm('addDialogForm')" size="small">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -48,7 +83,6 @@ export default {
   name: "payWay",
   components: {
     contentHeader: () => import("@/components/common/contentHeader"),
-    editAddDialog: () => import("./editAddDialog")
   },
   data() {
     return {
@@ -65,33 +99,6 @@ export default {
         editDialogVisible: false,
         addDialogVisible: false
       },
-      editConfig: {
-        title: "编辑",
-        data: [
-          {
-            label: "支付ID",
-            prop: "id",
-            placeholder: "请输入支付ID",
-            type: "input",
-            disabled: true
-          },
-          {
-            label: "支付名称",
-            placeholder: "请输入名称",
-            prop: "name",
-            type: "input",
-            disabled: false,
-            rules:[{ required: true, message: "请输入支付名称", trigger: "blur" }]
-          },
-          {
-            label: "状态",
-            placeholder: "请选择状态",
-            prop: "status",
-            type: "select",
-            disabled: false
-          }
-        ]
-      },
       editDialogData: {
         id: "",
         name: "",
@@ -100,6 +107,9 @@ export default {
       addDialogData: {
         name: "",
         status: ""
+      },
+      rules: {
+        name: [{ required: true, message: "请输入支付名称", trigger: "blur" }]
       },
       response: {
         total: 3,
