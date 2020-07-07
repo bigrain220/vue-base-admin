@@ -36,10 +36,8 @@
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[ 10,20, 50]" :page-size="size" layout="total, sizes, prev, pager, next, jumper" :total="total"></el-pagination>
       </div>
     </div>
-    <!-- editDialog -->
-    <edit-add-dialog v-if="dialogVisible.editDialogVisible" :isShow.sync="dialogVisible.editDialogVisible" :data="editDialogData" :config="editConfig" :selectOptions="selectOptions"></edit-add-dialog>
-    <!-- addDialog-->
-    <edit-add-dialog v-if="dialogVisible.addDialogVisible" :isShow.sync="dialogVisible.addDialogVisible" :data="addDialogData" :config="editConfig" :selectOptions="selectOptions"></edit-add-dialog>
+    <!-- common -->
+    <edit-add-dialog v-if="dialogVisible" :isShow.sync="dialogVisible" :data="dialogData" :config="dialogConfig" :selectOptions="selectOptions"></edit-add-dialog>
   </div>
 </template>
 
@@ -61,12 +59,8 @@ export default {
         value: ""
       },
       tableData: [],
-      dialogVisible: {
-        editDialogVisible: false,
-        addDialogVisible: false
-      },
-      editConfig: {
-        title: "编辑",
+      dialogVisible:false,
+      dialogConfig: {
         data: [
           {
             label: "支付ID",
@@ -92,6 +86,7 @@ export default {
           }
         ]
       },
+      dialogData:{},
       editDialogData: {
         id: "",
         name: "",
@@ -163,10 +158,11 @@ export default {
       this.search();
     },
     editClick(row) {
-      Object.keys(this.editDialogData).forEach(key => {
-        this.editDialogData[key] = row[key];
+     this.dialogData={id:"",name: "",status: ""}
+       Object.keys(this.dialogData).forEach(key => {
+        this.dialogData[key] = row[key];
       });
-      this.dialogVisible.editDialogVisible = true;
+      this.dialogVisible = true;
     },
     deleteClick(id) {
       this.$confirm("删除后无法恢复, 是否继续删除?", "提示", {
@@ -188,25 +184,26 @@ export default {
         .catch(() => { });
     },
     addClick() {
-      this.dialogVisible.addDialogVisible = true;
+      this.dialogData={name: "",status: ""}
+      this.dialogVisible = true;
     },
-    payWayDialogClose(params) {
-      if (params === "edit") {
-        Object.keys(this.editDialogData).forEach(key => {
-          this.editDialogData[key] = "";
-        });
-        this.$nextTick(() => {
-          this.$refs.editDialogForm.clearValidate();
-        });
-      } else if (params === "add") {
-        Object.keys(this.addDialogData).forEach(key => {
-          this.addDialogData[key] = "";
-        });
-        this.$nextTick(() => {
-          this.$refs.addDialogForm.clearValidate();
-        });
-      }
-    },
+    // payWayDialogClose(params) {
+    //   if (params === "edit") {
+    //     Object.keys(this.editDialogData).forEach(key => {
+    //       this.editDialogData[key] = "";
+    //     });
+    //     this.$nextTick(() => {
+    //       this.$refs.editDialogForm.clearValidate();
+    //     });
+    //   } else if (params === "add") {
+    //     Object.keys(this.addDialogData).forEach(key => {
+    //       this.addDialogData[key] = "";
+    //     });
+    //     this.$nextTick(() => {
+    //       this.$refs.addDialogForm.clearValidate();
+    //     });
+    //   }
+    // },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
