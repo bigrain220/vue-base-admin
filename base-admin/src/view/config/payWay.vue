@@ -47,7 +47,7 @@ export default {
   name: "payWay",
   components: {
     contentHeader: () => import("@/components/common/contentHeader"),
-    editAddDialog: () => import("./editAddDialog")
+    editAddDialog: () => import("@/components/common/editAddDialog")
   },
   data() {
     return {
