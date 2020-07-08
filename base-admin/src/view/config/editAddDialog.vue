@@ -1,14 +1,15 @@
 <template>
-  <el-dialog :title="config.title" :visible.sync="isShow" :before-close="closeDialog" custom-class="self-dialog" width="60%">
-    <el-form size="small" :inline="true" label-width="100px" label-suffix=":" class="self-form" :model="allData">
+  <el-dialog :title="config.title.name" :visible.sync="isShow" :before-close="closeDialog" :custom-class="['self-dialog',config.className]" width="60%">
+    <el-form size="small" label-width="100px" label-suffix=":" class="self-form" :model="allData" ref="dialogForm">
       <el-row>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" v-for="(item,index) in config.data" :key="index">
-          <el-form-item :label="item.label" :prop="item.prop" :rules="item.rules"  v-if="allData[item.prop]!==undefined">
+          <el-form-item :label="item.label" :prop="item.prop" :rules="item.rules" v-if="allData[item.prop]!==undefined">
             <el-input v-if="item.type==='input'" v-model="allData[item.prop]" :placeholder="item.placeholder" :disabled="item.disabled"></el-input>
             <el-select v-if="item.type==='select'" v-model="allData[item.prop]" :placeholder="item.placeholder" :disabled="item.disabled">
-              <el-option v-for="selectItem in selectOptions[item.prop]()" :key="selectItem.value" :label="selectItem.label" :value="selectItem.value">
+              <el-option v-for="selectItem in item.options" :key="selectItem.value" :label="selectItem.label" :value="selectItem.value">
               </el-option>
             </el-select>
+            <el-date-picker v-if="item.type==='date'" v-model="allData[item.prop]" type="date" value-format="yyyy-MM-dd" :placeholder="item.placeholder" :disabled="item.disabled"></el-date-picker>
           </el-form-item>
         </el-col>
       </el-row>
@@ -25,9 +26,8 @@ export default {
   name: "editAddDialog",
   props: {
     isShow: { type: Boolean },
-    data: { required: true },//dialog的数据对象
+    data: { required: true },//dialog的form数据对象
     config: { type: Object },//dialog的配置对象
-    selectOptions: { type: Object }//select的数据对象
   },
   data() {
     return {};
@@ -37,12 +37,19 @@ export default {
       this.$emit("update:isShow", false);
     },
     submitForm() {
-      console.log("submitData", this.submitData);
+      this.$refs.dialogForm.validate(valid => {
+        if (valid) {
+          console.log("submitData", this.submitData);
+          this.$emit('formSubmit', this.submitData)
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      })
     }
   },
   mounted() {
     console.log("data", this.data);
-    console.log('selectOptions', this.selectOptions, this.selectOptions.status())
   },
   computed: {
     allData() {
@@ -64,13 +71,20 @@ export default {
 <style lang="scss">
 .self-dialog {
   .el-form-item {
-    display: flex;
     .el-form-item__content {
-      flex: 1;
       .el-select {
         width: 100%;
       }
+      .el-date-editor {
+        width: 100%;
+      }
     }
+  }
+}
+@media screen and (max-width: 992px) {
+  .self-dialog {
+    width: 98% !important;
+    margin: 0 auto;
   }
 }
 </style>

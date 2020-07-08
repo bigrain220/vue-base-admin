@@ -21,9 +21,10 @@
           <el-table-column label="支付ID" prop="id" width="120" align="center"></el-table-column>
           <el-table-column width="100"></el-table-column>
           <el-table-column label="支付名称" prop="name" align="left"></el-table-column>
+          <el-table-column label="支付时间" prop="paidtime" align="left"></el-table-column>
           <el-table-column label="状态" align="left">
             <template slot-scope="scope">
-              <div v-text="(selectOptions.status().find(x=>x.value==scope.row.status)).label"></div>
+              <div v-text="((dialogConfig.data.find(x=>x.prop=='status')).options.find(y=>y.value==scope.row.status)).label"></div>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="160">
@@ -36,8 +37,8 @@
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[ 10,20, 50]" :page-size="size" layout="total, sizes, prev, pager, next, jumper" :total="total"></el-pagination>
       </div>
     </div>
-    <!-- common -->
-    <edit-add-dialog v-if="dialogVisible" :isShow.sync="dialogVisible" :data="dialogData" :config="dialogConfig" :selectOptions="selectOptions"></edit-add-dialog>
+    <!-- common-dialog -->
+    <edit-add-dialog v-if="dialogVisible" :isShow.sync="dialogVisible" :data="dialogData" :config="dialogConfig" @formSubmit="formSubmit"></edit-add-dialog>
   </div>
 </template>
 
@@ -59,8 +60,10 @@ export default {
         value: ""
       },
       tableData: [],
-      dialogVisible:false,
+      dialogVisible: false,
       dialogConfig: {
+        title: { name: "", value: '' },
+        className:"",
         data: [
           {
             label: "支付ID",
@@ -71,60 +74,55 @@ export default {
           },
           {
             label: "支付名称",
-            placeholder: "请输入名称",
             prop: "name",
+            placeholder: "请输入名称",
             type: "input",
             disabled: false,
-            rules:[{ required: true, message: "请输入支付名称", trigger: "blur" }]
+            rules: [{ required: true, message: "请输入支付名称", trigger: "blur" }]
+          },
+          {
+            label: "支付时间",
+            prop: "paidtime",
+            placeholder: "请选择支付时间",
+            type: "date"
           },
           {
             label: "状态",
-            placeholder: "请选择状态",
             prop: "status",
+            placeholder: "请选择状态",
             type: "select",
-            disabled: false
+            disabled: false,
+            options: [
+              { value: '1', label: '正常' },
+              { value: '2', label: '禁用' }
+            ]
           }
         ]
       },
-      dialogData:{},
-      editDialogData: {
-        id: "",
-        name: "",
-        status: ""
-      },
-      addDialogData: {
-        name: "",
-        status: ""
-      },
+      dialogData: {},
       response: {
         total: 3,
         rows: [
           {
             id: 1,
             name: "微信",
+            paidtime: "2020-06-01",
             status: '1'
           },
           {
             id: 2,
             name: "支付宝",
+            paidtime: "2020-07-01",
             status: '1'
           },
           {
             id: 4,
             name: "测试1",
+            paidtime: "2020-07-10",
             status: '2'
           }
         ]
       },
-      selectOptions: {
-        status() {
-          const arr = [
-            { value: '1', label: '正常' },
-            { value: '2', label: '禁用' }
-          ]
-          return arr
-        }
-      }
     };
   },
   methods: {
@@ -158,10 +156,11 @@ export default {
       this.search();
     },
     editClick(row) {
-     this.dialogData={id:"",name: "",status: ""}
-       Object.keys(this.dialogData).forEach(key => {
+      this.dialogData = { id: "", name: "", paidtime: "", status: "" }
+      Object.keys(this.dialogData).forEach(key => {
         this.dialogData[key] = row[key];
       });
+      this.dialogConfig.title = { name: "编辑", value: "edit" };
       this.dialogVisible = true;
     },
     deleteClick(id) {
@@ -184,59 +183,31 @@ export default {
         .catch(() => { });
     },
     addClick() {
-      this.dialogData={name: "",status: ""}
+      this.dialogData = { name: "", paidtime: "", status: "" };
+      this.dialogConfig.title = { name: "新增", value: "add" };
       this.dialogVisible = true;
     },
-    // payWayDialogClose(params) {
-    //   if (params === "edit") {
-    //     Object.keys(this.editDialogData).forEach(key => {
-    //       this.editDialogData[key] = "";
-    //     });
-    //     this.$nextTick(() => {
-    //       this.$refs.editDialogForm.clearValidate();
-    //     });
-    //   } else if (params === "add") {
-    //     Object.keys(this.addDialogData).forEach(key => {
-    //       this.addDialogData[key] = "";
-    //     });
-    //     this.$nextTick(() => {
-    //       this.$refs.addDialogForm.clearValidate();
-    //     });
-    //   }
-    // },
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          if (formName === "editDialogForm") {
-            // MentEdit(this.editDialogData).then(res => {
-            //   this.dealResponse("edit", res);
-            // });
-          } else if (formName === "addDialogForm") {
-            // MentAdd(this.addDialogData).then(res => {
-            //   this.dealResponse("add", res);
-            // });
-          }
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+    formSubmit(params) {
+      console.log('formSubmit', params)
+      const formName = this.dialogConfig.title.value;
+      if (formName === "edit") {
+        // MentEdit(params).then(res => {
+        //   this.dealResponse("edit", res);
+        // });
+      } else if (formName === "add") {
+        // MentAdd(params).then(res => {
+        //   this.dealResponse("add", res);
+        // });
+      }
     },
     dealResponse(type, res) {
       var params = {
-        title: "",
-        visibleName: ""
+        title: ""
       };
-      if (type === "edit") {
-        params.title = "编辑";
-        params.visibleName = "editDialogVisible";
-      } else if (type === "add") {
-        params.title = "添加";
-        params.visibleName = "addDialogVisible";
-      }
+      type === "edit" ? params.title = '编辑' : type === "add" ? params.title = '添加' : "";
       if (res.code === 1) {
         this.$message.success(params.title + "成功！");
-        this.dialogVisible[params.visibleName] = false;
+        this.dialogVisible = false;
         this.search();
       } else if (res.msg === "FAILURE") {
         this.$message.error(params.title + "失败！");
