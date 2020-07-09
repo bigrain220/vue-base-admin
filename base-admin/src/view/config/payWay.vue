@@ -49,10 +49,8 @@
     <!-- common-dialog -->
     <edit-add-dialog v-if="dialogVisible" :isShow.sync="dialogVisible" :data="dialogData" :config="dialogConfig" @formSubmit="formSubmit">
       <!-- slot为true时显示 -->
-      <template slot="id" slot-scope="row">
-        <div>
-          {{row.data.id}}
-        </div>
+      <template slot="name" slot-scope="row">
+        <el-input v-model="row.data.name"></el-input>
       </template>
     </edit-add-dialog>
   </div>
@@ -88,7 +86,6 @@ export default {
             placeholder: "请输入支付ID",
             type: "input",
             disabled: true,
-            slot: false
           },
           {
             label: "支付名称",
@@ -96,7 +93,8 @@ export default {
             placeholder: "请输入名称",
             type: "input",
             disabled: false,
-            rules: [{ required: true, message: "请输入支付名称", trigger: "blur" }]
+            rules: [{ required: true, message: "请输入支付名称", trigger: "blur" }],
+            slot:false
           },
           {
             label: "支付时间",
