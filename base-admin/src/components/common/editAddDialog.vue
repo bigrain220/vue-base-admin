@@ -12,7 +12,7 @@
               </el-select>
               <el-date-picker v-if="item.type==='date'" v-model="allData[item.prop]" type="date" value-format="yyyy-MM-dd" :placeholder="item.placeholder" :disabled="item.disabled"></el-date-picker>
             </template>
-            <slot :name="item.prop" :data="allData" v-if="item.slot"></slot>
+            <slot :name="item.prop" :row="allData" v-if="item.slot"></slot>
           </el-form-item>
         </el-col>
       </el-row>

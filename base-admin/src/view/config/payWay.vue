@@ -26,7 +26,7 @@
         <div class="outside-btn">
           <el-button type="primary" size="small" class="add-btn" icon="el-icon-plus" @click="addClick">新增</el-button>
         </div>
-        <el-table :data="tableData" style="width: 100%" stripe>
+        <el-table :data="tableData" style="width: 100%" stripe v-loading="loading.table">
           <el-table-column label="支付ID" prop="id" width="120" align="center"></el-table-column>
           <el-table-column width="100"></el-table-column>
           <el-table-column label="支付名称" prop="name" align="left"></el-table-column>
@@ -49,8 +49,8 @@
     <!-- common-dialog -->
     <edit-add-dialog v-if="dialogVisible" :isShow.sync="dialogVisible" :data="dialogData" :config="dialogConfig" @formSubmit="formSubmit">
       <!-- slot为true时显示 -->
-      <template slot="name" slot-scope="row">
-        <el-input v-model="row.data.name"></el-input>
+      <template slot="name" slot-scope="scope">
+        slot:<el-input v-model="scope.row.name"></el-input>
       </template>
     </edit-add-dialog>
   </div>
@@ -75,6 +75,9 @@ export default {
         status: ""
       },
       tableData: [],
+      loading:{
+        table:true
+      },
       dialogVisible: false,
       dialogConfig: {
         title: { name: "", value: '' },
@@ -235,18 +238,14 @@ export default {
         this.$message.error(params.title + "失败: " + res.msg);
       }
     },
-    // getMentList(params) {
-    //   MentList(params).then(res => {
-    //     // console.log(res);
-    //     this.total = res.total;
-    //     this.tableData = res.rows;
-    //   });
-    // }
   },
   mounted() {
-    // this.getMentList({ page: this.currentPage, rows: this.size });
     this.total = this.response.total;
     this.tableData = this.response.rows;
+    var timer = setTimeout(()=>{
+      this.loading.table=false;
+      clearTimeout(timer);
+    },2000)
   },
   watch: {
     total() {
