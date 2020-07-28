@@ -48,9 +48,9 @@
     </div>
     <!-- common-dialog -->
     <edit-add-dialog v-if="dialogVisible" :isShow.sync="dialogVisible" :data="dialogData" :config="dialogConfig" @formSubmit="formSubmit">
-      <!-- slot为true时显示 -->
-      <template slot="name" slot-scope="scope">
-        slot:<el-input v-model="scope.row.name"></el-input>
+      <!-- slot为true时显示 最新版slot结构赋值写法-->
+      <template #name="{row}">
+        slot:<el-input v-model="row.name"></el-input>
       </template>
     </edit-add-dialog>
   </div>
