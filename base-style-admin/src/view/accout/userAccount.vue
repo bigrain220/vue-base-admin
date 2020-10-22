@@ -11,7 +11,7 @@
 
 <script>
 import { getTagsAPI} from "@/api/account/index";
-// import nodeApi from "@/api/nodeApi"
+import nodeApi from "@/api/nodeApi"
 export default {
   name: "userAccount",
   components: {
@@ -30,9 +30,9 @@ export default {
       });
     },
     getTest(){
-      // nodeApi.getTest1({}).then(res => {
-      //    console.log('test1:',res)
-      // });
+      nodeApi.getTest1({}).then(res => {
+         console.log('test1:',res)
+      });
     }
   },
   mounted() {

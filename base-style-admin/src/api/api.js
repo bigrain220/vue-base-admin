@@ -38,7 +38,7 @@ let isLogin = true; //让弹窗只弹一次；
 axios.interceptors.response.use(
   response => {
     // 对响应数据做点什么
-    console.log(response, 'response')
+    // console.log(response, 'response')
     if (response.config.url ==  '/login' || response.config.url == '/logout') {
       isLogin = true;
       return response;
