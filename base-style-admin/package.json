@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint",
     "start": "concurrently \"nodemon ./node/start.js\" \"npm run serve\""
   },
+  
   "dependencies": {
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
